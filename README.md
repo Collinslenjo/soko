@@ -32,16 +32,18 @@ api/rentbooks/ | False | View and create rent records
 api/rentbooks/<int:rent_id>/ | False | Retrieve Update and Delete rent records
 
 
-#### STORY 2
+#### STORY 3
 * create a user i.e for testing use (```./manage.py createsuperuser```)
-* create 3 categories in the database with their charges i.e  ```{"name":"regular", "charge":1.5} , {"name":"fiction", "charge":3} , {"name":"novels", "charge":1.5}```
+* create 3 categories (regular, fiction, and novel) in the database with their charges i.e  ``` {"name":"regular", "charge":1.5, "minimumcharge": 4.5,"minimumdays":3} ```
 
 ```
 POST http://localhost:8000/api/books/
 {
     "id": 1,
-    "name": "fiction",
-    "charge": 1,
+    "name": "novel",
+    "charge": 1.5,
+    "minimumcharge": 4.5,
+    "minimumdays": 3,
     "createdAt": "2019-03-15T10:05:51.343411Z",
     "updatedAt": "2019-03-15T10:05:51.343445Z"
 }

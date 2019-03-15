@@ -20,14 +20,23 @@ def index(req):
 	rented =[]
 
 	for mybooks in rentedBooks:
-		charges = mybooks.book.category.charge
+		charges    = mybooks.book.category.charge
+		mincharges = mybooks.book.category.minimumcharge
+		mindays    = mybooks.book.category.minimumdays
 		if mybooks.dateReturned is not None:
 			days_calc = mybooks.dateReturned.date() - mybooks.dateBorrowed.date()
 			days = days_calc.days
 		else:
 			days_calc = datetime.now().date() - mybooks.dateBorrowed.date()
 			days = days_calc.days
-		cost_per_book = days * charges
+
+		if mindays is not None and days <= mindays:
+			cost_per_book = mincharges
+		else:
+			otherdays = days - mindays
+			cost = otherdays * charges
+			cost_per_book = cost + mincharges
+
 		rented.append(cost_per_book)
 
 	result = sum(rented)
@@ -42,7 +51,9 @@ class ListCategories(generics.ListCreateAPIView):
 	def post(self,request, **kwargs):
 		category  = BookCategory.objects.create(
 			name     = request.data["name"],
-			charge = request.data["charge"])
+			charge   = request.data["charge"],
+			minimumcharge = request.data["minimumcharge"],
+			minimumdays   = request.data["minimumdays"])	
 		return Response(
 			data   = BookCategorySerializer(category).data,
 			status = status.HTTP_201_CREATED)

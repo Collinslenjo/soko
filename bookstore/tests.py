@@ -25,7 +25,7 @@ class BaseViewTest(APITestCase):
 		self.client.force_authenticate(user=user)
 		self.get_user_profile(user[0])
 		self.user_id = user[0].id
-		category_test = {"name":"fiction", "charge":1}
+		category_test = {"name":"fiction", "charge":1, "minimumcharge":2, "minimumdays":2}
 		category_response = self.client.post('/api/categories/',category_test)
 		self.category_id = category_response.data
 
@@ -39,7 +39,7 @@ class getCategoriesTest(BaseViewTest):
 		self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 	def test_create_category(self):
-		category = {"name":"fiction", "charge":1}
+		category = {"name":"fiction", "charge":1, "minimumcharge":2, "minimumdays":2}
 		response = self.client.post('/api/categories/',category)
 		self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
