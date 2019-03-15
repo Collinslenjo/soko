@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 class BookCategory(models.Model):
 	name = models.CharField(max_length=256)
 	charge = models.FloatField()
+	minimumcharge = models.FloatField()
+	minimumdays = models.IntegerField()
 	createdAt = models.DateTimeField(auto_now_add=True)
 	updatedAt = models.DateTimeField(auto_now_add=True)
 

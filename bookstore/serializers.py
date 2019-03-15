@@ -8,8 +8,8 @@ class BookSerializer(serializers.ModelSerializer):
 
 class BookCategorySerializer(serializers.ModelSerializer):
 	class Meta:
+		fields = ("id","name", "charge","minimumcharge", "minimumdays","createdAt","updatedAt")
 		model = BookCategory
-		fields = ("id","name", "charge","createdAt","updatedAt")
 
 class RentedBookCategorySerializer(serializers.ModelSerializer):
 	class Meta:

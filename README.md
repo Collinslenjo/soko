@@ -32,25 +32,29 @@ api/rentbooks/ | False | View and create rent records
 api/rentbooks/<int:rent_id>/ | False | Retrieve Update and Delete rent records
 
 
-#### STORY 1
+#### STORY 3
 * create a user i.e for testing use (```./manage.py createsuperuser```)
-* create a category in the database with a charges i.e  ```{"name":"regular", "charge":1}```
-Response:
+* create 3 categories (regular, fiction, and novel) in the database with their charges i.e  ``` {"name":"regular", "charge":1.5, "minimumcharge": 4.5,"minimumdays":3} ```
 
 ```
+POST http://localhost:8000/api/books/
+
 {
     "id": 1,
-    "name": "fiction",
-    "charge": 1,
+    "name": "novel",
+    "charge": 1.5,
+    "minimumcharge": 4.5,
+    "minimumdays": 3,
     "createdAt": "2019-03-15T10:05:51.343411Z",
     "updatedAt": "2019-03-15T10:05:51.343445Z"
 }
 ```
 
-* create a book with the category id i.e ```{"bookname":"A Dance of Dragons", "category":1,"user":1}```
-Response:
+ * create different books with the category id's i.e ```{"bookname":"A Dance of Dragons", "category":1,"user":1}```
 
 ```
+POST http://localhost:8000/api/categories/
+
 {
     "id": 1,
     "bookname": "A Dance of Dragons",
@@ -64,6 +68,8 @@ Response:
 * your response should look like below:
 
 ```
+POST http://localhost:8000/api/rentbooks/
+
 {
     "id": 1,
     "book": 1,
