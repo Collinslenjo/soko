@@ -20,7 +20,7 @@ def index(req):
 	rented =[]
 
 	for mybooks in rentedBooks:
-		charges = mybooks.book.category.charge
+		charges = 1
 		if mybooks.dateReturned is not None:
 			days_calc = mybooks.dateReturned.date() - mybooks.dateBorrowed.date()
 			days = days_calc.days
